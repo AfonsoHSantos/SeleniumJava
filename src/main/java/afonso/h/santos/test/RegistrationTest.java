@@ -1,27 +1,21 @@
-import org.junit.After;
+package afonso.h.santos.test;
+import static afonso.h.santos.core.DriverFactory.getDriver;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class RegistrationTest {
+import afonso.h.santos.core.BaseTest;
+import afonso.h.santos.page.CampoTreinamentoPage;
 
-	private WebDriver driver;
+public class RegistrationTest extends BaseTest {
+
 	private CampoTreinamentoPage page;
 
 	@Before
-	public void setUp() {
-		driver = new ChromeDriver();
-		driver.manage().window().setSize(new Dimension(1200, 765));
-		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-		page = new CampoTreinamentoPage(driver);
-	}
-
-	@After
-	public void tearDown() {
-		driver.quit();
+	public void before() {
+		getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		page = new CampoTreinamentoPage();
 	}
 
 	@Test

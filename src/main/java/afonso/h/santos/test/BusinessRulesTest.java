@@ -1,3 +1,7 @@
+package afonso.h.santos.test;
+import static afonso.h.santos.core.DriverFactory.getDriver;
+import static afonso.h.santos.core.DriverFactory.killDriver;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -10,14 +14,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import afonso.h.santos.core.BaseTest;
+import afonso.h.santos.core.DSL;
+import afonso.h.santos.page.CampoTreinamentoPage;
 
 @RunWith(Parameterized.class)
 public class BusinessRulesTest {
-
-	private WebDriver driver;
+	
 	private DSL dsl;
 	private CampoTreinamentoPage page;
 
@@ -35,17 +39,10 @@ public class BusinessRulesTest {
 	public String msg;
 
 	@Before
-	public void setUp() {
-		driver = new ChromeDriver();
-		driver.manage().window().setSize(new Dimension(1200, 765));
-		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-		dsl = new DSL(driver);
-		page = new CampoTreinamentoPage(driver);
-	}
-
-	@After
-	public void tearDown() {
-		driver.quit();
+	public void before() {
+		getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		dsl = new DSL();
+		page = new CampoTreinamentoPage();
 	}
 
 	@Parameters
@@ -70,7 +67,7 @@ public class BusinessRulesTest {
 			page.setSexo("female");
 		}
 		if (comidas.contains("Carne"))
-			page.setComida("carne");
+			page.setComida("Carne");
 		if (comidas.contains("Pizza"))
 			page.setComida("Pizza");
 		if (comidas.contains("Vegetariano"))
